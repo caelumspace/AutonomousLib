@@ -1,0 +1,20 @@
+#include <iostream>
+#include "cspice/SpiceUsr.h"
+
+int main() {
+    // Initialize the CSPICE library
+    furnsh_c("cspice/data/standard.tm");
+
+    // Get the position of the planet Mars in the J2000 reference frame
+    SpiceDouble lt;
+    SpiceDouble mars_pos[3];
+    spkezr_c("Mars", 0.0, "J2000", "NONE", "Earth", mars_pos, &lt);
+
+    // Print the position of Mars
+    std::cout << "Mars position: (" << mars_pos[0] << ", " << mars_pos[1] << ", " << mars_pos[2] << ")" << std::endl;
+
+    // Unload the CSPICE library
+    unload_c("cspice/data/standard.tm");
+
+    return 0;
+}
